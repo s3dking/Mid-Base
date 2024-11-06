@@ -18,6 +18,7 @@ module.exports = function (client) {
     for (const file of prefixFolder) {
         const filePath = path.join('../Commands/Prefix', file);
         const prefixCommand = require(filePath);
+		console.success(`[ PREFIX ] Loaded: ${prefixFolder.length} file(s)`)
 
         if ('name' in prefixCommand && 'execute' in prefixCommand) {
             const cmdName = prefixCommand.name;
