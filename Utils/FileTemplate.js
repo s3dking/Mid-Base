@@ -54,7 +54,14 @@ module.exports = {
     execute: function(client, ...args) {
         // Your event code here
     }
-};`
+};`,
+    schemas: `const { Schema, model } = require('mongoose');
+
+let schema = new Schema({
+    //schema code goes here
+});
+
+module.exports = model('schema name', schema);`
 };
 
 function setupTemplateGenerator(client) {
@@ -62,6 +69,7 @@ function setupTemplateGenerator(client) {
     const commandsPath = path.join(__dirname, '../Commands/Slash');
     const prefixPath = path.join(__dirname, '../Commands/Prefix');
     const eventsPath = path.join(__dirname, '../Events');
+    const schemaPath = path.join(__dirname, '../Schemas');
 
     const watchPaths = {
         commands: commandsPath,
@@ -69,7 +77,8 @@ function setupTemplateGenerator(client) {
         menus: path.join(componentsPath, 'menus'),
         modals: path.join(componentsPath, 'modals'),
         prefix: prefixPath,
-        events: eventsPath
+        events: eventsPath,
+        schemas: schemaPath
     };
 
     for (const [type, dir] of Object.entries(watchPaths)) {
