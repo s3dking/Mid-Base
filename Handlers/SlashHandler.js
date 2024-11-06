@@ -40,6 +40,7 @@ module.exports = function (client) {
                 Routes.applicationCommands(ClientID),
                 { body: commands }
             );
+            console.success(`[ SLASH ] Loaded: ${commands.length} file(s)`)
 
             console.success('[ SLASH ] Refreshed Commands Succesfully');
         } catch (error) {

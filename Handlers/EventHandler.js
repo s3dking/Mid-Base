@@ -9,7 +9,8 @@ module.exports = (client) => {
     for (const file of eventFiles) {
         const filePath = path.join(eventsPath, file);
         const eventModule = require(filePath);
-        Log.success(`[ EVENT ] Loaded ${eventFiles.length} event(s)`);
+        Log.success(`[ EVENT ] Loaded ${eventModule.event}`);
+        Log.success(`[ EVENT ] Loaded ${eventFiles.length} file(s)`);
         if (eventModule.once) {
             client.once(eventModule.event, (...args) => eventModule.execute(...args, client));
         } else {
