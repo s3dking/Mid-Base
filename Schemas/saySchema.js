@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 let schema = new Schema({
-    //schema code goes here
+    Content: String
 });
 
-module.exports = model('schema name', schema);
+module.exports = model('saySchema', schema);
