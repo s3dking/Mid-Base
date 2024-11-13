@@ -1,2 +1,4 @@
 config.json
 .gitattributes
+
+node_modules
