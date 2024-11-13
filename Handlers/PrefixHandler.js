@@ -57,7 +57,7 @@ module.exports = function (client) {
         }
 
         try {
-            await command.execute(message, client);
+            await command.execute(message, args, client);
             console.prefix(`${prefix}${commandName} has been executed by ${message.author.tag}`);
         } catch (error) {
             console.error(error);
