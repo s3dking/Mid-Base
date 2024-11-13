@@ -2,8 +2,7 @@
     "name": "midbase-v3",
     "main": "index.js",
     "scripts": {
-        "config": "node Utils/ConfigCommand.js",
-        "dev": "node Utils/dev.js"
+        "config": "node Other/ConfigCommand.js"
     },
     "dependencies": {
         "discord.js": "^14.16.3",
