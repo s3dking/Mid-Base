@@ -1,6 +1,6 @@
 module.exports = {
     customId: 'client',
-    async execute(client, interaction) {
+    async execute(interaction, client) {
         client.logs.util(client)
     }
 };
