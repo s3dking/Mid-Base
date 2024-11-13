@@ -1,9 +1,9 @@
 module.exports = {
     command: 'client',
     
-    async execute(client, interaction) {
-        client.logs.util(client)
-        interaction.reply('Client Logged')
+    async execute(message, args, client) {
+		client.logs.util(client)
+        message.reply('Client Logged')
 
         const button = {
             type: 1,
@@ -17,6 +17,6 @@ module.exports = {
             ]
         }
 
-        await interaction.channel.send({ content: 'button',components: [button]})
+        await message.channel.send({ content: 'button', components: [button]})
     }
 };
