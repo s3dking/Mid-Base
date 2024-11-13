@@ -1,6 +1,7 @@
 module.exports = {
-    name: 'ping',
-    async execute(message, client) {
+    alias: ['pong'],
+    command: 'ping',
+    execute: async(message, client) => {
         const embed = {
             title: "Here is this bots latency:",
             color: 0x1bcf09,
@@ -20,7 +21,7 @@ module.exports = {
                     type: 2,
                     style: 1,
                     custom_id: 'latency',
-                    label: 'Latency',
+                    label: 'Latency', 
                     emoji: '📊'
                 }
             ]

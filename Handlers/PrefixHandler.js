@@ -4,46 +4,64 @@ const { Collection } = require('discord.js')
 const { prefix } = require('../config.json')
 
 module.exports = function (client) {
-    const console = require('../Utils/logs.js');
+    const console = require('../Other/logs.js');
 
     const prefixFolder = fs.readdirSync('Commands/Prefix').filter((f) => f.endsWith('.js'));
 
-    client.prefix = new Collection();
+    client.prefix = new Map();
+    client.command = new Map();
 
-    for (arx of prefixFolder) {
-		const Cmd = require('../Commands/Prefix/' + arx)
-		client.prefix.set(Cmd.name, Cmd)
-	}
+    for (const arx of prefixFolder) {
+        const Cmd = require('../Commands/Prefix/' + arx)
+        client.prefix.set(Cmd.command, Cmd)
+    }
 
     for (const file of prefixFolder) {
         const filePath = path.join('../Commands/Prefix', file);
         const prefixCommand = require(filePath);
-		console.success(`[ PREFIX ] Loaded: ${prefixFolder.length} file(s)`)
+        console.prefix(`Loaded: ${prefixFolder.length} file(s)`)
 
-        if ('name' in prefixCommand && 'execute' in prefixCommand) {
-            const cmdName = prefixCommand.name;
-            console.success(`[ PREFIX ] Loaded: ${cmdName}`);
+        if ('command' in prefixCommand && 'execute' in prefixCommand) {
+            const cmdName = prefixCommand.command;
+            console.prefix(`Loaded: ${cmdName}`);
+
+            if (prefixCommand.alias && prefixCommand.alias.length) {
+                for (const alias of prefixCommand.alias) {
+
+                    if (client.command.has(alias)) {
+                        client.logs.warn(`The alias "${alias}" for the prefix command "${cmdName}" is already loaded.`);
+                    } else {
+                        client.command.set(alias, prefixCommand);
+                        client.logs.prefix(`Alias: ${alias}`);
+                    }
+                }
+            }
+        } else {
+            console.error(`Command at ${filePath} is missing required properties.`);
         }
     }
 
-    client.on('messageCreate', async message => {;
-		if (!message.content.startsWith(prefix) || message.author.bot) return;
-	
-		const args = message.content.slice(prefix.length).trim().split(/ +/);
-		const commandName = args.shift().toLowerCase();
-	
-		const command = client.prefix.get(commandName);
-	
-		if (!command) return;
-	
-		try {
-			await command.execute(message, args);
-		} catch (error) {
-			console.error(error);
-			await message.reply('There was an error executing that command!');
-		}
-		if(command.execute) {
-			console.log(`[ PREFIX ] ${prefix}${commandName} has been executed by ${message.author.tag}`)
-		}
-	});
+    client.on('messageCreate', async message => {
+        if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+        const args = message.content.slice(prefix.length).trim().split(/ +/);
+        const commandName = args.shift().toLowerCase();
+
+        console.util(`Received command: ${commandName}`);
+
+        const command = client.prefix.get(commandName) || client.command.get(commandName);
+
+        if (!command) {
+            console.warn(`Command not found: ${commandName}`); 
+            return;
+        }
+
+        try {
+            await command.execute(message, client);
+            console.prefix(`${prefix}${commandName} has been executed by ${message.author.tag}`);
+        } catch (error) {
+            console.error(error);
+            await message.reply('There was an error executing that command!');
+        }
+    });
 }

@@ -1,0 +1,9 @@
+{
+    "name": "midbase-v3",
+    "main": "index.js",
+    "scripts": {
+      "config": "node Utils/ConfigCommand.js",
+      "dev": "node Utils/dev.js"
+    }
+  }
+  

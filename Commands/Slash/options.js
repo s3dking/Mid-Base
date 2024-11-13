@@ -5,19 +5,6 @@ module.exports = {
     .setName('options')
     .setDescription('Options'),
     async execute(interaction, client) {
-        /*const menu = new StringSelectMenuBuilder()
-        .setCustomId('menus')
-        .setPlaceholder('TESTING')
-        .addOptions(
-            {
-                label: 'test',
-                description: 'tst',
-                value: 'opt'
-            }
-        );
-
-        const row = new ActionRowBuilder()
-        .addComponents(menu)*/
 
         const menu = {
             type: 1,

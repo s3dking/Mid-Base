@@ -2,8 +2,7 @@
 Credits to musicmaker for this code!
 */
 
-const log = require('./logs.js');
-log.login('[ BOT ] Anti Crash Activated')
+const log = require('../Other/logs.js');
 
 module.exports = function () {
 

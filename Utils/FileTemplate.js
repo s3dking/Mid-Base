@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const console = require('./logs')
+const console = require('../Other/logs')
 
 const templates = {
     commands: `const { SlashCommandBuilder } = require('discord.js');
@@ -93,7 +93,7 @@ function setupTemplateGenerator(client) {
                 const stats = fs.statSync(filePath);
                 if (stats.size === 0) {
                     fs.writeFileSync(filePath, templates[type]);
-                    console.log(`[ TEMPLATE ] Generated ${type} for ${filename}`);
+                    console.util(`Generated ${type} for ${filename}`);
                 }
             }
         });

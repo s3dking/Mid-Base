@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = (client) => {
-    const Log = require('../Utils/logs.js');
+    const Log = require('../Other/logs.js');
     client.components = new Map();
 
     const componentsPath = path.join(__dirname, '../Components');
@@ -17,7 +17,7 @@ module.exports = (client) => {
         for (const file of componentFiles) {
             const component = require(path.join(folderPath, file));
 
-            Log.success(`[ COMPONENT ] Loaded: ${component.customId}`);
+            Log.comp(`Loaded: ${component.customId}`);
 
             if (!component.customId) {
                 Log.error(`The component at ${path.join(folderPath, file)} is missing a required "customId" property.`);
@@ -30,7 +30,7 @@ module.exports = (client) => {
             }
 
             if (client.components.has(component.customId)) {
-                Log.warn(`[WARNING] A component with the customId "${component.customId}" already exists.`);
+                Log.warn(`A component with the customId "${component.customId}" already exists.`);
             }
 
             if (component.customId) {
@@ -40,7 +40,7 @@ module.exports = (client) => {
     }
 
     client.on('interactionCreate', async interaction => {
-        const Log = require('../Utils/logs.js');
+        const Log = require('../Other/logs.js');
         if (!interaction.isButton() && !interaction.isAnySelectMenu() && !interaction.isModalSubmit()) return;
 
         const component = client.components.get(interaction.customId);
@@ -48,7 +48,7 @@ module.exports = (client) => {
 
         try {
             await component.execute(interaction, client);
-            Log.log(`[ COMPONENT ] ${interaction.customId} has been executed by ${interaction.user.tag}`);
+            Log.comp(`${interaction.customId} has been executed by ${interaction.user.tag}`);
         } catch (error) {
             Log.error(error);
             await interaction.reply({

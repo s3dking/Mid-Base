@@ -7,8 +7,6 @@
 
 * mongoose
 
-* mongodb
-
 **RUN npm i (the package) TO DOWNLOAD ALL OF THESE PACKAGES**
 
 ## FOLDER INFO
@@ -17,11 +15,11 @@
 
 * Commands/Prefix: **Prefix Commands Folder**
 
-* Events: **Events Folder** *( CREDITS TO ghowsting.dev )*
+* Events: **Events Folder**
 
 * Handlers: **The folder that makes everything possible**
 
-* Components: **Button, Dropdown Menu, Modal Folder** *( CREDITS TO ghowsting.dev )*
+* Components: **Button, Dropdown Menu, Modal Folder**
 
 ## Extra Info
 
@@ -49,7 +47,7 @@
   * Login
     * **purple**  
 
-* In order to use the logs you must do Log.(whatever color you want to do (using the colors listed above) ) {example: Log.Success('Hello!') } will come out as display the word Hello! in green with the logging system ( if Log is defined correctly )
+* In order to use the logs you must do Log.(whatever color you want to do (using the colors listed above) ) {example: Log.success('Hello!') } will come out as display the word Hello! in green with the logging system ( if Log is defined correctly )
 
 
 ### CREDITS TO MUSICMAKER FOR THE COLORED LOGS SYSTEM, AND ANTI CRASH SYSTEM
