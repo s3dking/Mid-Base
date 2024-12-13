@@ -1,10 +1,8 @@
 module.exports = {
     customId: 'say',
-    async execute(interaction, client) {
-        const message = interaction.fields.getTextInputValue('txt');
-		await interaction.deferReply({ ephemeral: true });
-
-        interaction.channel.send(message)
-        interaction.editReply({ content: 'Message has been sent!', ephemeral: true})
+    async execute(interaction, args, client) {
+        const input = interaction.fields.getTextInputValue('txt');
+        await interaction.channel.send(`${input}`);
+        await interaction.reply({ content: `Received: ${input}`, ephemeral: true });
     }
-}
+};

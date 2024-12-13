@@ -1,17 +1,12 @@
-const { SlashCommandBuilder } = require('discord.js')
-
 module.exports = {
-    data: new SlashCommandBuilder()
-    .setName('options')
-    .setDescription('Options'),
-    async execute(interaction, client) {
+    name: 'options',
+    async execute(message, args, client) {
 
         const menu = {
             type: 1,
             components: [
                 {
                     type: 3,
-                    placeholder: 'Options',
                     custom_id: 'menus',
                     options: [
                         {
@@ -24,11 +19,12 @@ module.exports = {
                             description: 'Option #2',
                             value: 'option2'
                         }
-                    ]
+                    ],
+                    placeholder: 'Options',
                 }
             ]
         }
 
-        await interaction.reply({ content: 'Press an option', components: [menu] })
+        await message.reply({ content: 'Press an option', components: [menu] })
     }
 }

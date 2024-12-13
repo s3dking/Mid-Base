@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const console = require('../Other/logs')
+const console = require('../logs')
 
 const templates = {
     commands: `const { SlashCommandBuilder } = require('discord.js');
 
-module.exports = {
+module.exports = { 
     data: new SlashCommandBuilder()
         .setName('commandname')
         .setDescription('Command description'),
@@ -42,8 +42,7 @@ module.exports = {
     name: 'commandname',
     
     async execute(message, args, client) {
-        await message.channel.send('Hello!');
-        await message.delete();
+        await message.reply('Hello!');
     }
 };`,
 
@@ -51,25 +50,29 @@ module.exports = {
     event: 'eventName',
     once: false,
     
-    execute: function(client, ...args) {
+    async execute(client, ...args) {
         // Your event code here
     }
 };`,
-    schemas: `const { Schema, model } = require('mongoose');
-
-let schema = new Schema({
-    //schema code goes here
-});
-
-module.exports = model('schema name', schema);`
+    context: `const { ApplicationCommandType, ContextMenuCommandBuilder } = require('discord.js');
+    
+    module.exports = {
+        data: new ContextMenuCommandBuilder()
+            .setName('Command Name')
+            .setType(/*the application type you want*/), // ApplicationCommandType.User, ApplicationCommandType.Message
+        async execute(interaction, client) {
+            //code goes here
+        },
+    };
+    `
 };
 
 function setupTemplateGenerator(client) {
-    const componentsPath = path.join(__dirname, '../Components');
-    const commandsPath = path.join(__dirname, '../Commands/Slash');
-    const prefixPath = path.join(__dirname, '../Commands/Prefix');
-    const eventsPath = path.join(__dirname, '../Events');
-    const schemaPath = path.join(__dirname, '../Schemas');
+    const componentsPath = path.join(__dirname, '../../Components');
+    const commandsPath = path.join(__dirname, '../../Commands/Slash');
+    const prefixPath = path.join(__dirname, '../../Commands/Prefix');
+    const eventsPath = path.join(__dirname, '../../Events');
+    const contextPath = path.join(__dirname, '../../Commands/Context');
 
     const watchPaths = {
         commands: commandsPath,
@@ -78,7 +81,7 @@ function setupTemplateGenerator(client) {
         modals: path.join(componentsPath, 'modals'),
         prefix: prefixPath,
         events: eventsPath,
-        schemas: schemaPath
+        context: contextPath
     };
 
     for (const [type, dir] of Object.entries(watchPaths)) {
@@ -89,11 +92,12 @@ function setupTemplateGenerator(client) {
                 const filePath = path.join(dir, filename);
                 
                 if (!fs.existsSync(filePath)) return;
-                
+                const fileNameWithoutExt = path.basename(filename, '.js');
+                templates[type] = templates[type].replace(/(setName\(|name: |customId: |event: )'[^']*'/ , `$1'${fileNameWithoutExt}'`);
                 const stats = fs.statSync(filePath);
                 if (stats.size === 0) {
                     fs.writeFileSync(filePath, templates[type]);
-                    console.util(`Generated ${type} for ${filename}`);
+                    console.info(`Generated ${type} for ${filename}`);
                 }
             }
         });

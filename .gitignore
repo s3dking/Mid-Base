@@ -1,4 +1,6 @@
 config.json
-.gitattributes
-
 node_modules
+Handlers/InteractionLoader.txt
+NEW TESTING
+Utils/OLDLOGS.JS
+app.js

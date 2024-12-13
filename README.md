@@ -1,53 +1,38 @@
-# IMPORTANT
-* MOVE ALL FILES IN THE FOLDER AND MOVE IT TO THE MAIN DIRECTORY
+# Mid Base V5
 
-## REQUIRED PACKAGES
+## Folder Info
 
-* discord.js
+* ### Commands
+  - **Slash**: The folder to store your slash commands.
+  - **Prefix**: The folder to store your prefix commands.
+  - **Context**: The folder to store your context commands.
 
-* mongoose
+* ### Components
+  - **Buttons**: The folder to store all of your Discord button response code.
+  - **Menus**: The folder to store all of your Discord dropdown menu response code.
+  - **Modals**: The folder to store all of your Discord modal response code.
 
-**RUN npm i (the package) TO DOWNLOAD ALL OF THESE PACKAGES**
+* ### Events
+  - The folder to store all of your events that do different things based on the event you are using. **(DO NOT TOUCH INTERACTIONS FOLDER)**
 
-## FOLDER INFO
+* ### Utils
+  - The folder with utilities to make your coding life easier, like logs, etc.
 
-* Commands/Slash: **Slash Commands Folder**
+* ### Handlers
+  - The folder where the slash, prefix, and context commands are made possible.
 
-* Commands/Prefix: **Prefix Commands Folder**
+## Important
+- Rename `EXAMPLE.json` to `config.json`.
+- Fill out the token in `config.json` or run `npm run config` in your terminal.
+- Do not share your Bot Token.
+- If you have any bugs or questions, reach out to me via Discord at @s3dking.
 
-* Events: **Events Folder**
+## Config Information
 
-* Handlers: **The folder that makes everything possible**
-
-* Components: **Button, Dropdown Menu, Modal Folder**
-
-## Extra Info
-
-- Rename EXAMPLE.json To config.json
-
-- Fill out everything in config.json *(otherwise the bot will not work)*
-
-- Message me on discord for support *(user is s3dking)*
-
-## About Logs
-
-* Define "`const Log = require('the logs.js file path');`" for the logs to work
-
-* Here is a list of all of the logging colors:
-  * Log
-    * **yellow**
-  * Error
-    * **red**
-  * Success
-    * **green**
-  * Debug
-    * **blue**
-  * Warn
-    * **orange**
-  * Login
-    * **purple**  
-
-* In order to use the logs you must do Log.(whatever color you want to do (using the colors listed above) ) {example: Log.success('Hello!') } will come out as display the word Hello! in green with the logging system ( if Log is defined correctly )
-
-
-### CREDITS TO MUSICMAKER FOR THE COLORED LOGS SYSTEM, AND ANTI CRASH SYSTEM
+|Config Name|What to put|
+|-|:-:|
+|token|Bot token from discord developer portal|
+|devguildID|The guild id for your bots dev server ( for the dev property )|
+|cmdLogChannel|The channel id of where you want to log when commands are used|
+|blacklistedUserIds|The people that are not allowed to use your bot|
+|prefix|the prefix of your bot e.g. !ping|

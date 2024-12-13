@@ -1,10 +1,11 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
     alias: ['pong'],
     data: new SlashCommandBuilder()
-    .setName('ping')
-    .setDescription('Recieve the latency and api latency of this bot'),
+        .setName('ping')
+        .setDescription('Replies with the bots latency'),
+        
     async execute(interaction, client) {
         const embed = {
             title: "Here is this bots latency:",
@@ -25,7 +26,7 @@ module.exports = {
                     type: 2,
                     style: 1,
                     custom_id: 'latency',
-                    label: 'Latency',
+                    label: 'Latency', 
                     emoji: '📊'
                 }
             ]
@@ -33,4 +34,4 @@ module.exports = {
 
         await interaction.reply({ embeds: [embed], components: [button]})
     }
- }
+};

@@ -1,9 +1,8 @@
-const console = require('../Other/logs.js');
+const { ChannelType } = require('discord.js');
 
 module.exports = {
     event: 'guildCreate',
-    
-     async execute(guild) {
-        console.login(`[ EVENT & BOT ] guildCreate: Bot has joined ${guild.name}`)
+    async execute(guild) {
+        client.logs.event(`${client.user.tag} ( ${client.user.id} ) Has Joined ${guild.name}`)
     }
-};
+}

@@ -1,11 +1,9 @@
 {
-    "name": "midbase-v3",
     "main": "index.js",
     "scripts": {
-        "config": "node Other/ConfigCommand.js"
+        "config": "node Utils/ConfigTerminal.js"
     },
     "dependencies": {
-        "discord.js": "^14.16.3",
-        "mongoose": "^8.8.1"
+        "discord.js": "^14.16.3"
     }
 }

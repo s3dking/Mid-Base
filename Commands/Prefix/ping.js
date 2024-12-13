@@ -1,6 +1,7 @@
 module.exports = {
+    cooldown: 5,
     alias: ['pong'],
-    command: 'ping',
+    name: 'ping',
     execute: async(message, client) => {
         const embed = {
             title: "Here is this bots latency:",

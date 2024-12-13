@@ -1,8 +1,7 @@
 module.exports = {
     event: 'ready',
     once: false,
-    
-    execute: function(client, ...args) {
-        client.logs.login(`${client.user.tag} Is Online`)
+    async execute(args, client) {
+        client.logs.login(`${client.user.tag} ( ${client.user.id} ) Has Connected To Mid Base V5`)
     }
 };

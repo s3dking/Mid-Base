@@ -2,7 +2,7 @@
 Credits to musicmaker for this code!
 */
 
-const log = require('../Other/logs.js');
+const log = require('../logs.js');
 
 module.exports = function () {
 
