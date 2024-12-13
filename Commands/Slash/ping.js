@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-    alias: ['pong'],
     data: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('Replies with the bots latency'),

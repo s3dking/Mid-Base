@@ -1,5 +1,4 @@
 module.exports = {
-    dev: true,
     name: 'poke',
     async execute(message, args, client) {
 

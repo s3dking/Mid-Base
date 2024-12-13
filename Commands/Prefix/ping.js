@@ -1,6 +1,4 @@
 module.exports = {
-    cooldown: 5,
-    alias: ['pong'],
     name: 'ping',
     execute: async(message, client) => {
         const embed = {
