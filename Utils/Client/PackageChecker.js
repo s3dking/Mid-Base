@@ -80,6 +80,7 @@ module.exports = async function(client) {
         
             for (const pkg of missingPackages) {
                 try {
+                    client.logs.pkg(`Downloading package: ${pkg}`); // Inform the user that a package is being downloaded
                     execSync(`npm install ${pkg} --no-fund --no-audit`, {
                         stdio: ['ignore', 'ignore', 'ignore'],
                         env: { ...process.env, NODE_NO_WARNINGS: '1' }
