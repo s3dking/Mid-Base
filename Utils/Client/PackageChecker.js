@@ -17,7 +17,7 @@ const CONFIG = {
     fileExtensions: ['.js', '.jsx', '.ts', '.tsx']
 };
 
-async function PackageChecker() {
+module.exports = async function(client) {
     try {
         const packageJsonPath = path.join(__dirname, '../../package.json');
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
@@ -85,20 +85,20 @@ async function PackageChecker() {
                         env: { ...process.env, NODE_NO_WARNINGS: '1' }
                     });
                     results.success.push(pkg);
-                    console.log(`Installing package: ${pkg}`);
+                    client.logs.pkg(`Installing package: ${pkg}`);
                 } catch (error) {
                     results.failed.push(pkg);
-                    console.log(`Failed to install ${pkg}`);
+                    client.logs.pkg(`\x1b[31mFailed to install ${pkg}`);
                 }
             }
         
             if (missingPackages.length === 0) {
-                console.log('No new packages to install');
+                client.logs.pkg('No new packages to install');
             } else {
-                console.log(`\nInstallation complete:`);
-                console.log(`Successfully installed: ${results.success.length} packages`);
+                client.logs.pkg(`\nInstallation complete:`);
+                client.logs.pkg(`Successfully installed: ${results.success.length} packages`);
                 if (results.failed.length > 0) {
-                    console.log(`Failed to install: ${results.failed.join(', ')}`);
+                    client.logs.pkg(`\x1b[31mFailed to install: ${results.failed.join(', ')}`);
                 }
             }
         
@@ -119,5 +119,3 @@ async function PackageChecker() {
         throw error;
     }
 }
-
-module.exports = PackageChecker;

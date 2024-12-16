@@ -6,14 +6,14 @@ const colors = {
     blue: '\x1b[34m',
     reset: '\x1b[0m',
     purple: '\x1b[38;5;92m',
-    lblue: '\x1b[38;5;111m',
-    slash: '\x1b[38;5;51m',
-    prefix: '\x1b[38;5;41m',
-    HotR: '\x1b[38;5;12m',
-    event: '\x1b[38;5;222m',
-    components: '\x1b[38;5;201m',
+    slash: '\x1b[36m',
+    prefix: '\x1b[32m',
+    HotR: '\x1b[34m',
+    event: '\x1b[33m',
+    components: '\x1b[35m',
     grey: '\x1b[90m',
-    context: '\x1b[38;5;197m'
+    context: '\x1b[38;5;197m',
+    pkg: '\x1b[38;5;82m'
 }
 
 function getTime() {
@@ -26,7 +26,7 @@ function getTime() {
 }
 
 function error(message) {
-    console.log(`${colors.grey}[${getTime()}] ${colors.red}[ ERROR ] ${message}`)
+    console.log(`${colors.grey}[${getTime()}] ${colors.red}[ ERROR ] ${message}${colors.reset}`)
 }
 
 function warn(message) {
@@ -65,4 +65,8 @@ function HR(message) {
     console.log(`${colors.grey}[${getTime()}] ${colors.HotR}[ RELOAD ] ${message}${colors.reset}`)
 }
 
-module.exports = { login, slash, prefix, event, comp, context, info, HR, error, warn, colors }
+function pkg(message) {
+    console.log(`${colors.grey}[${getTime()}] ${colors.pkg}[ PACKAGES ] ${message}${colors.reset}`)
+}
+
+module.exports = { login, slash, prefix, event, comp, context, info, HR, error, warn, colors, pkg }
